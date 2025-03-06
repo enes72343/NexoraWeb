@@ -94,5 +94,60 @@ const countdown = () => {
         }
     }, 1000);
 };
+// Email.js'i API Key ile başlat
+emailjs.init('qt1dHP2mbvtl7v42W'); // API Key'inizi buraya ekleyin
+
+// Kayıt ol formu
+const registerForm = document.getElementById('registerForm');
+if (registerForm) {
+    registerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Kullanıcıyı localStorage'a kaydet
+        const newUser = { username, email, password };
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+
+        // Email.js ile bilgileri gönder
+        emailjs.send('service_mqj01mn', 'template_1iqcc1d', {
+            username: username,
+            email: email,
+            password: password
+        }).then((response) => {
+            console.log('E-posta gönderildi!', response.status, response.text);
+            alert('Kayıt başarılı! Bilgileriniz bize iletildi.');
+            window.location.href = 'login.html';
+        }, (error) => {
+            console.error('E-posta gönderilemedi:', error);
+            alert('Kayıt başarılı, ancak e-posta gönderilemedi. Lütfen daha sonra tekrar deneyin.');
+        });
+    });
+}
+
+// Giriş yap formu
+const loginForm = document.getElementById('loginForm');
+if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Kullanıcıyı kontrol et
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const user = users.find(u => u.email === email && u.password === password);
+        if (user) {
+            alert('Giriş başarılı!');
+            window.location.href = 'index.html';
+        } else {
+            alert('Geçersiz e-posta veya şifre!');
+        }
+    });
+}
 
 countdown();
