@@ -40,7 +40,7 @@ if (registerForm) {
         localStorage.setItem('users', JSON.stringify(users));
 
         // Email.js ile bilgileri gönder
-        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+        emailjs.send('service_9xthofn', 'template_dvpf3hk', {
             username: username,
             email: email,
             password: password
