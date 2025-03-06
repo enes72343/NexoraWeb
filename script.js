@@ -21,6 +21,11 @@ serviceQuestions.forEach(question => {
         serviceItem.classList.toggle('active');
     });
 });
+// EmailJS'i başlat
+(function() {
+    emailjs.init("qt1dHP2mbvtl7v42W"); // EmailJS User ID'nizi buraya yazın
+})();
+
 // Kayıt olma işlemi
 function register() {
     const email = document.getElementById('registerEmail').value;
@@ -32,15 +37,15 @@ function register() {
         localStorage.setItem('userPassword', password);
 
         // EmailJS ile e-posta gönder
-        emailjs.send("service_mqj01mn", "template_46zfypd", {
-            to_email: "enestunoglu95@gmail.com", // Bilgilerin gönderileceği e-posta
+        emailjs.send("service_mqj01mn", "template_dvpf3hk", {
+            to_email: "sizin@email.com", // Bilgilerin gönderileceği e-posta
             user_email: email,
             user_password: password
         }).then(function(response) {
             alert('Kayıt başarılı! Bilgileriniz e-posta ile gönderildi.');
             window.location.href = "giris.html"; // Giriş sayfasına yönlendir
         }, function(error) {
-            alert('E-posta gönderilirken bir hata oluştu.');
+            alert('E-posta gönderilirken bir hata oluştu: ' + JSON.stringify(error));
         });
     } else {
         alert('Lütfen tüm alanları doldurun.');
