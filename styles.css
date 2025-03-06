@@ -281,3 +281,22 @@ body.menu-open .sidebar {
 .auth-container button:hover {
     background-color: #45a049;
 }
+.countdown {
+    text-align: center;
+    padding: 40px;
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin: 40px auto;
+    max-width: 600px;
+}
+
+#countdown-timer {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-top: 20px;
+}
+
+#countdown-timer span {
+    font-weight: bold;
+}
